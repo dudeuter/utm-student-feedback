@@ -1,8 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: 'production',
   entry: path.resolve(__dirname, 'client', 'index.jsx'),
   output: {
     path: path.resolve(__dirname, 'public'),
