@@ -1,5 +1,22 @@
 # utm-student-feedback
 
+Requirements to run:
+
+* Node v12.16.2
+* MongoDB Community v4.2.2
+
+Getting Started:
+
+* npm run seed-database
+* npm run build
+* npm start
+
+Development:
+
+* npm run seed-database
+* npm run react-dev
+* npm run start-dev
+
 ## npm start
 
 runs application with node
