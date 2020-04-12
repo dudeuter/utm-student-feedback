@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const db = require('./database');
 
 const app = express();
-const PORT = 3001;
+const PORT = 80;
 
 app.use(morgan('dev'));
 
