@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useInView } from 'react-intersection-observer';
 
 import Avatar from './Avatar';
 import StarRating from './StarRating';
@@ -12,6 +13,7 @@ const Container = styled.div`
   flex-direction: row;
   border-top: 1px solid #dedfe0;
   padding: 15px 0px 15px 0px;
+  min-height: 100px;
   @media (max-width: 575px) {
     flex-direction: column;
   }
@@ -76,22 +78,45 @@ Response.defaultProps = {
   response: null,
 };
 
-const Review = ({ review }) => (
-  <Container>
-    <Profile>
-      <Avatar src={review.avatar} username={review.user} />
-    </Profile>
-    <Info>
-      <div>{review.user}</div>
-      <div>{formatTime(review.created)}</div>
-    </Info>
-    <Content>
-      <StarRating rating={review.rating} />
-      <div>{review.content}</div>
-      <Response response={review.response} />
-    </Content>
-  </Container>
-);
+const Review = ({ review }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0,
+    rootMargin: '0px',
+  });
+
+  return (
+    <Container ref={ref}>
+      {
+        inView
+          ? (
+            <>
+              <Profile>
+                <Avatar src={review.avatar} username={review.user} />
+              </Profile>
+              <Info>
+                <div>{review.user}</div>
+                <div>{formatTime(review.created)}</div>
+              </Info>
+              <Content>
+                <StarRating rating={review.rating} />
+                <div>{review.content}</div>
+                <Response response={review.response} />
+              </Content>
+            </>
+          )
+          : null
+      }
+    </Container>
+  );
+};
+
+// (inView
+//     ? (
+
+//     )
+//     : null
+//   );
 
 
 Review.propTypes = {
