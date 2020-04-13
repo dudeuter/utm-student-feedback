@@ -1,4 +1,5 @@
 const path = require('path');
+const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -8,7 +9,7 @@ const app = express();
 const PORT = 80;
 
 app.use(morgan('dev'));
-
+app.use(compression());
 app.use(express.static(path.join(__dirname, '../public')));
 
 const randPercent = () => Math.ceil(Math.random() * 100);
