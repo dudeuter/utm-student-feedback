@@ -11,6 +11,6 @@ module.exports = {
     enzymeAdapter: 'react16',
   },
   transform: {
-    '^.+\\.jsx$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
   },
 };
