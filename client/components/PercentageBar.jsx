@@ -9,7 +9,7 @@ const Track = styled.div`
   border-radius: 3px;
 `;
 const Slider = styled.div`
-  width: ${(props) => props.percent}%;
+  width: ${({ percent }) => percent}%;
   background-color: #8a92a3;
   border-radius: 3px;
   height: 20px;
