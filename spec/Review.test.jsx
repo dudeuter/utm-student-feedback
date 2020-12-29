@@ -2,14 +2,19 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Review from '../client/components/Review';
+import formatTime from '../client/formatTime';
 
 describe('Review Component', () => {
-  const NOW = new Date();
+  const currentTime = new Date();
+
+  const NOW = currentTime.toString();
+  const LATER = new Date(currentTime.valueOf() + 500).toString();
+
   const review = {
     content: 'This is a review',
     rating: 4,
-    created: NOW.toString(),
-    modified: NOW.toString(),
+    created: NOW,
+    modified: NOW,
     user: 'Sam Deuter',
     avatar: 'localhost:3000/smiley.png',
   };
@@ -30,10 +35,11 @@ describe('Review Component', () => {
   });
 
   it('should display the creation date', () => {
-    expect(wrapper.contains(NOW.toString())).toBe(true);
+    const string = formatTime(NOW);
+
+    expect(wrapper.contains(string)).toBe(true);
   });
 
-  const LATER = new Date(NOW.valueOf() + 500);
   const reviewWithResponse = {
     ...review,
     response: {
@@ -50,13 +56,15 @@ describe('Review Component', () => {
     expect(responseWrapper.text().includes('This is a response')).toBe(true);
   });
 
-  // this test is failing, when it should be passing
-  // I don't know specifically why this one passing
   it('should display the author\'s username', () => {
     expect(responseWrapper.text().includes('hello author')).toBe(true);
   });
 
   it('should display the time of the response', () => {
-    expect(responseWrapper.text().includes(LATER.toString())).toBe(true);
+
+    // test it against the human readable string
+    const string = formatTime(LATER);
+
+    expect(responseWrapper.text().includes(string)).toBe(true);
   });
 });
