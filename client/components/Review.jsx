@@ -111,14 +111,6 @@ const Review = ({ review }) => {
   );
 };
 
-// (inView
-//     ? (
-
-//     )
-//     : null
-//   );
-
-
 Review.propTypes = {
   review: PropTypes.shape({
     content: PropTypes.string.isRequired,
